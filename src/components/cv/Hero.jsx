@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { Terminal, Download, ChevronDown } from "lucide-react";
 import { profile } from "@/data/cvData";
 import BootSequence from "./BootSequence";
+import { Image } from "@/components/ui/image";
 
 export default function Hero({ onDownload }) {
   const [booted, setBooted] = useState(false);
@@ -30,6 +31,25 @@ export default function Hero({ onDownload }) {
               <span className="text-primary">santiago@gonzalez</span>:
               <span className="text-primary">~</span>$ whoami
             </div>
+
+            <motion.div
+              initial={{ opacity: 0, scale: 0.85 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.05, duration: 0.4 }}
+              className="relative mb-4 inline-block"
+            >
+              <div className="relative h-28 w-28 overflow-hidden rounded-full border-2 border-primary/50 border-glow sm:h-32 sm:w-32">
+                <Image
+                  src={profile.avatar}
+                  alt={profile.name}
+                  fittingType="fill"
+                  className="h-full w-full"
+                />
+              </div>
+              <span className="absolute -bottom-1 -right-1 flex h-6 w-6 items-center justify-center rounded-full border border-primary bg-background text-[9px] font-bold text-primary text-glow">
+                ●
+              </span>
+            </motion.div>
 
             <div>
               <motion.h1

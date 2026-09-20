@@ -6,6 +6,7 @@ export const profile = {
   handle: "santiago",
   role: "Técnico de Sistemas y Redes",
   currentRole: "Técnico de redes en el CGT Norte de la DGT",
+  avatar: "https://media.base44.com/images/public/6ab04a2fe7f70e5fc936a7ea/72099bd7b_1653942645660.jpg",
   location: "Valladolid, Castilla y León — España",
   summary:
     "Joven apasionado por la informática y la tecnología de la información. Actualmente mi vida profesional ha dado un cambio de rama tecnológica: trabajo como técnico de redes y sistemas para un importante ente público perteneciente al Ministerio del Interior del Gobierno de España.",
