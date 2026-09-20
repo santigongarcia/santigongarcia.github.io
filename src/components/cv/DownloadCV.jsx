@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { Mail, Linkedin, Globe, FileDown } from "lucide-react";
+import { Mail, Linkedin, FileDown } from "lucide-react";
 import { profile, skills, languages } from "@/data/cvData";
 
-// Genera un PDF del CV con estética terminal (fondo oscuro, mono, cyan).
+// Genera un PDF del CV con estética terminal (fondo oscuro, mono, verde).
 export default function DownloadCV({ experience = [], education = [], certifications = [] }) {
   const [progress, setProgress] = useState(0);
   const [exporting, setExporting] = useState(false);
@@ -32,7 +32,7 @@ export default function DownloadCV({ experience = [], education = [], certificat
     let y = M;
 
     // cabecera
-    doc.setTextColor(0, 245, 255);
+    doc.setTextColor(0, 255, 0);
     doc.setFont(mono, "bold");
     doc.setFontSize(20);
     doc.text("Santiago Gonzalez Garcia", M, y + 8);
@@ -51,20 +51,15 @@ export default function DownloadCV({ experience = [], education = [], certificat
     y += 16;
     doc.setFont(mono, "normal");
     doc.setFontSize(8);
-    doc.setTextColor(0, 245, 255);
+    doc.setTextColor(0, 255, 0);
     doc.text("email:", M, y);
     doc.setTextColor(226, 232, 240);
     doc.text(profile.contact.email, M + 50, y);
     y += 12;
-    doc.setTextColor(0, 245, 255);
+    doc.setTextColor(0, 255, 0);
     doc.text("linkedin:", M, y);
     doc.setTextColor(226, 232, 240);
     doc.text(profile.contact.linkedinHandle, M + 50, y);
-    y += 12;
-    doc.setTextColor(0, 245, 255);
-    doc.text("web:", M, y);
-    doc.setTextColor(226, 232, 240);
-    doc.text(profile.contact.webHandle, M + 50, y);
     y += 20;
 
     const section = (title, code) => {
@@ -76,7 +71,7 @@ export default function DownloadCV({ experience = [], education = [], certificat
       }
       doc.setFont(mono, "bold");
       doc.setFontSize(11);
-      doc.setTextColor(0, 245, 255);
+      doc.setTextColor(0, 255, 0);
       doc.text(`$ ${title}`, M, y);
       doc.setFont(mono, "normal");
       doc.setFontSize(7);
@@ -125,7 +120,7 @@ export default function DownloadCV({ experience = [], education = [], certificat
         doc.rect(0, 0, W, H, "F");
         y = M;
       }
-      doc.setTextColor(0, 245, 255);
+      doc.setTextColor(0, 255, 0);
       doc.text(`[${c.tag}]`, M, y);
       doc.setTextColor(226, 232, 240);
       doc.text(c.name, M + 50, y);
@@ -144,7 +139,7 @@ export default function DownloadCV({ experience = [], education = [], certificat
         doc.rect(0, 0, W, H, "F");
         y = M;
       }
-      doc.setTextColor(0, 245, 255);
+      doc.setTextColor(0, 255, 0);
       doc.setFont(mono, "bold");
       doc.text(cat, M, y);
       y += 11;
@@ -164,7 +159,7 @@ export default function DownloadCV({ experience = [], education = [], certificat
         doc.rect(0, 0, W, H, "F");
         y = M;
       }
-      doc.setTextColor(0, 245, 255);
+      doc.setTextColor(0, 255, 0);
       doc.setFont(mono, "bold");
       doc.text(e.center, M, y);
       doc.setFont(mono, "normal");
@@ -224,15 +219,6 @@ export default function DownloadCV({ experience = [], education = [], certificat
           >
             <Linkedin className="h-4 w-4" />
             LinkedIn
-          </a>
-          <a
-            href={profile.contact.web}
-            target="_blank"
-            rel="noreferrer"
-            className="inline-flex items-center gap-2 border border-border px-4 py-2.5 font-mono text-sm text-foreground transition hover:border-primary hover:text-primary"
-          >
-            <Globe className="h-4 w-4" />
-            Web
           </a>
         </div>
 

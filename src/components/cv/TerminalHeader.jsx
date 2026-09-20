@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Wifi } from "lucide-react";
+import { Link } from "react-router-dom";
+import { Wifi, Lock } from "lucide-react";
 
 // Barra superior estilo ventana de terminal + indicador de latencia simulada.
 export default function TerminalHeader() {
@@ -38,6 +39,13 @@ export default function TerminalHeader() {
             <Wifi className="h-3.5 w-3.5 text-primary" />
             <span className="text-primary">{latency}ms</span>
           </span>
+          <Link
+            to="/admin"
+            className="hidden items-center gap-1 border border-border px-2 py-0.5 text-primary transition hover:border-primary hover:bg-primary/10 sm:flex"
+          >
+            <Lock className="h-3 w-3" />
+            <span>admin</span>
+          </Link>
           <span className="tabular-nums">{clock}</span>
         </div>
       </div>
