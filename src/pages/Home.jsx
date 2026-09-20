@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { base44 } from "@/api/base44Client";
 import TerminalHeader from "@/components/cv/TerminalHeader";
 import Hero from "@/components/cv/Hero";
 import ExperienceTimeline from "@/components/cv/ExperienceTimeline";
@@ -37,17 +38,47 @@ function MemoryTracker() {
 }
 
 export default function Home() {
+  const [data, setData] = useState({ experience: [], certifications: [], education: [] });
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    Promise.all([
+      base44.entities.Experience.list("order", 200),
+      base44.entities.Certification.list("order", 200),
+      base44.entities.Education.list("order", 200),
+    ])
+      .then(([experience, certifications, education]) => {
+        setData({ experience, certifications, education });
+      })
+      .catch(() => {
+        // en caso de error, dejamos arrays vacíos (el CV sigue renderizando)
+      })
+      .finally(() => setLoading(false));
+  }, []);
+
   return (
     <div className="relative min-h-screen scanlines">
       <TerminalHeader />
       <MemoryTracker />
       <main className="relative z-10">
         <Hero onDownload={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })} />
-        <ExperienceTimeline />
-        <CertificationsGrid />
-        <SkillsPanel />
-        <EducationPanel />
-        <DownloadCV />
+        {loading ? (
+          <div className="flex items-center justify-center py-20 font-mono text-xs text-muted-foreground">
+            <span className="text-primary">[ LOAD ]</span> fetching records<span className="cursor-blink">_</span>
+          </div>
+        ) : (
+          <>
+            <ExperienceTimeline experience={data.experience} />
+            <CertificationsGrid certifications={data.certifications} />
+            <SkillsPanel />
+            <EducationPanel education={data.education} />
+            <DownloadCV
+              experience={data.experience}
+              certifications={data.certifications}
+              education={data.education}
+            />
+          </>
+        )}
       </main>
     </div>
   );

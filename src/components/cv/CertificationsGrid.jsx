@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ShieldCheck, Lock, ChevronRight } from "lucide-react";
-import { certifications } from "@/data/cvData";
+import { Image } from "@/components/ui/image";
 import { SectionHeader } from "./ExperienceTimeline";
 
 // Certificaciones presentadas como "secure tokens" con checksum verificado.
@@ -12,7 +12,7 @@ function checksum(name) {
   return h.toString(16).padStart(8, "0").toUpperCase();
 }
 
-export default function CertificationsGrid() {
+export default function CertificationsGrid({ certifications = [] }) {
   const [open, setOpen] = useState(0);
 
   return (
@@ -25,7 +25,7 @@ export default function CertificationsGrid() {
             const active = open === idx;
             return (
               <motion.button
-                key={idx}
+                key={c.id || idx}
                 onClick={() => setOpen(active ? -1 : idx)}
                 initial={{ opacity: 0, y: 10 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -38,11 +38,13 @@ export default function CertificationsGrid() {
                 <div className="flex items-start justify-between gap-3">
                   <div className="flex items-center gap-3">
                     <div
-                      className={`flex h-10 w-10 items-center justify-center border transition-colors ${
+                      className={`flex h-10 w-10 shrink-0 items-center justify-center border transition-colors overflow-hidden p-0.5 ${
                         active ? "border-primary bg-primary/10" : "border-border bg-secondary/50 group-hover:border-primary/50"
                       }`}
                     >
-                      {active ? (
+                      {c.logoUrl ? (
+                        <Image src={c.logoUrl} alt="" fittingType="fit" className="h-full w-full" />
+                      ) : active ? (
                         <Lock className="h-4 w-4 text-primary" />
                       ) : (
                         <ShieldCheck className="h-4 w-4 text-muted-foreground group-hover:text-primary" />

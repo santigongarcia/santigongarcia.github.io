@@ -1,0 +1,48 @@
+{
+  "name": "Certification",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "title": "Nombre"
+    },
+    "issuer": {
+      "type": "string",
+      "title": "Entidad emisora"
+    },
+    "tag": {
+      "type": "string",
+      "title": "Etiqueta"
+    },
+    "logoUrl": {
+      "type": "string",
+      "title": "URL del logo"
+    },
+    "order": {
+      "type": "number",
+      "title": "Orden",
+      "default": 0
+    }
+  },
+  "required": [
+    "name"
+  ],
+  "rls": {
+    "read": {},
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

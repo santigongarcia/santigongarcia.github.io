@@ -1,0 +1,68 @@
+{
+  "name": "Experience",
+  "type": "object",
+  "properties": {
+    "company": {
+      "type": "string",
+      "title": "Empresa"
+    },
+    "role": {
+      "type": "string",
+      "title": "Puesto"
+    },
+    "period": {
+      "type": "string",
+      "title": "Periodo"
+    },
+    "duration": {
+      "type": "string",
+      "title": "Duraci\u00f3n"
+    },
+    "location": {
+      "type": "string",
+      "title": "Ubicaci\u00f3n"
+    },
+    "points": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Logros"
+    },
+    "logoUrl": {
+      "type": "string",
+      "title": "URL del logo"
+    },
+    "logoText": {
+      "type": "string",
+      "title": "Texto alternativo del logo"
+    },
+    "order": {
+      "type": "number",
+      "title": "Orden",
+      "default": 0
+    }
+  },
+  "required": [
+    "company",
+    "role"
+  ],
+  "rls": {
+    "read": {},
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}
