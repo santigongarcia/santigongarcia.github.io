@@ -1,6 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { Server } from "lucide-react";
+import { Image } from "@/components/ui/image";
 import { vendors } from "@/data/cvData";
 import { SectionHeader } from "./ExperienceTimeline";
 
@@ -28,9 +29,18 @@ export default function VendorLogos() {
             transition={{ duration: 0.25, delay: idx * 0.03 }}
             className="group flex h-16 items-center justify-center border border-border bg-secondary/30 px-2 text-center transition-colors hover:border-primary hover:bg-primary/5"
           >
-            <span className="font-mono text-xs font-semibold uppercase tracking-wide text-foreground/70 transition-colors group-hover:text-primary">
-              {v}
-            </span>
+            {v.logoUrl ? (
+              <Image
+                src={v.logoUrl}
+                alt={v.name}
+                fittingType="fit"
+                className="h-10 w-20 object-contain opacity-80 transition-opacity group-hover:opacity-100"
+              />
+            ) : (
+              <span className="font-mono text-xs font-semibold uppercase tracking-wide text-foreground/70 transition-colors group-hover:text-primary">
+                {v.name}
+              </span>
+            )}
           </motion.div>
         ))}
       </div>

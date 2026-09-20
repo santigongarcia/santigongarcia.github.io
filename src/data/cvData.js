@@ -26,9 +26,21 @@ export const skills = {
 };
 
 export const vendors = [
-  "Teldat", "Huawei", "Alcatel Lucent", "H3C", "Fortinet",
-  "Cisco", "TP-Link", "Allied Telesys", "Raisecom", "Teltonika",
-  "InHand", "Hikvision", "Lenovo", "HP", "Dell",
+  { name: "Teldat", logoUrl: "" },
+  { name: "Huawei", logoUrl: "https://media.base44.com/images/public/6ab04a2fe7f70e5fc936a7ea/94f03fd29_Huawei-Logowine.png" },
+  { name: "Alcatel Lucent", logoUrl: "https://media.base44.com/images/public/6ab04a2fe7f70e5fc936a7ea/4861245f4_Alcatel_Lucent_Logosvg.webp" },
+  { name: "H3C", logoUrl: "https://media.base44.com/images/public/6ab04a2fe7f70e5fc936a7ea/96ed2a0a6_highly-logo.webp" },
+  { name: "Fortinet", logoUrl: "https://media.base44.com/images/public/6ab04a2fe7f70e5fc936a7ea/33c58561e_Fortinet_Logo.png" },
+  { name: "Cisco", logoUrl: "https://media.base44.com/images/public/6ab04a2fe7f70e5fc936a7ea/380a3b6ad_Cisco_logo_blue_2016svg.webp" },
+  { name: "TP-Link", logoUrl: "" },
+  { name: "Allied Telesys", logoUrl: "https://media.base44.com/images/public/6ab04a2fe7f70e5fc936a7ea/1debf4397_AlliedTelesis-logo-5stripe-stacked-rgb.webp" },
+  { name: "Raisecom", logoUrl: "" },
+  { name: "Teltonika", logoUrl: "" },
+  { name: "InHand", logoUrl: "" },
+  { name: "Hikvision", logoUrl: "https://media.base44.com/images/public/6ab04a2fe7f70e5fc936a7ea/cb7479365_Hikvision.webp" },
+  { name: "Lenovo", logoUrl: "https://media.base44.com/images/public/6ab04a2fe7f70e5fc936a7ea/0f21c2adb_Branding_lenovo-logo_lenovologoposred_low_res.png" },
+  { name: "HP", logoUrl: "https://media.base44.com/images/public/6ab04a2fe7f70e5fc936a7ea/6b9da5b56_HP_logo_2025svg.webp" },
+  { name: "Dell", logoUrl: "https://media.base44.com/images/public/6ab04a2fe7f70e5fc936a7ea/74f7c524f_Dell_Logosvg.webp" },
 ];
 
 export const certifications = [
