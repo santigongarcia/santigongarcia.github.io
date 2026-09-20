@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { Cpu, Wrench, Monitor, Languages as LangIcon } from "lucide-react";
 import { skills, languages } from "@/data/cvData";
 import { SectionHeader } from "./ExperienceTimeline";
+import VendorLogos from "./VendorLogos";
 
 const ICONS = {
   Software: Cpu,
@@ -44,6 +45,8 @@ export default function SkillsPanel() {
             );
           })}
         </div>
+
+        <VendorLogos />
 
         {/* Idiomas como barras de progreso estilo diagnóstico */}
         <div className="mt-8 border border-border bg-card/40 p-5">

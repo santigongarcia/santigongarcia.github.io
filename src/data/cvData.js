@@ -25,6 +25,12 @@ export const skills = {
   "Sistemas operativos": ["Linux", "Windows Server", "Windows", "VyOS / FortiOS"],
 };
 
+export const vendors = [
+  "Teldat", "Huawei", "Alcatel Lucent", "H3C", "Fortinet",
+  "Cisco", "TP-Link", "Allied Telesys", "Raisecom", "Teltonika",
+  "InHand", "Hikvision", "Lenovo", "HP", "Dell",
+];
+
 export const certifications = [
   { name: "Ciberseguridad en la industria 4.0", issuer: "Formación especializada", tag: "SEC-4.0" },
   { name: "Curso de HTML y CSS", issuer: "Formación web", tag: "WEB-01" },
