@@ -26,17 +26,17 @@ export const skills = {
 };
 
 export const vendors = [
-  { name: "Teldat", logoUrl: "" },
+  { name: "Teldat", logoUrl: "https://media.base44.com/images/public/6ab04a2fe7f70e5fc936a7ea/a0efb3ff0_Teldat-Corporate-Logo.png" },
   { name: "Huawei", logoUrl: "https://media.base44.com/images/public/6ab04a2fe7f70e5fc936a7ea/94f03fd29_Huawei-Logowine.png" },
   { name: "Alcatel Lucent", logoUrl: "https://media.base44.com/images/public/6ab04a2fe7f70e5fc936a7ea/4861245f4_Alcatel_Lucent_Logosvg.webp" },
   { name: "H3C", logoUrl: "https://media.base44.com/images/public/6ab04a2fe7f70e5fc936a7ea/96ed2a0a6_highly-logo.webp" },
   { name: "Fortinet", logoUrl: "https://media.base44.com/images/public/6ab04a2fe7f70e5fc936a7ea/33c58561e_Fortinet_Logo.png" },
   { name: "Cisco", logoUrl: "https://media.base44.com/images/public/6ab04a2fe7f70e5fc936a7ea/380a3b6ad_Cisco_logo_blue_2016svg.webp" },
-  { name: "TP-Link", logoUrl: "" },
+  { name: "TP-Link", logoUrl: "https://media.base44.com/images/public/6ab04a2fe7f70e5fc936a7ea/91f36f134_TPLINK_Logo_2svg.webp" },
   { name: "Allied Telesys", logoUrl: "https://media.base44.com/images/public/6ab04a2fe7f70e5fc936a7ea/1debf4397_AlliedTelesis-logo-5stripe-stacked-rgb.webp" },
-  { name: "Raisecom", logoUrl: "" },
-  { name: "Teltonika", logoUrl: "" },
-  { name: "InHand", logoUrl: "" },
+  { name: "Raisecom", logoUrl: "https://media.base44.com/images/public/6ab04a2fe7f70e5fc936a7ea/fa3612968_logo-raisecom.png" },
+  { name: "Teltonika", logoUrl: "https://media.base44.com/images/public/6ab04a2fe7f70e5fc936a7ea/cd0c3f65f_Teltonika-logotipas.png" },
+  { name: "InHand", logoUrl: "https://media.base44.com/images/public/6ab04a2fe7f70e5fc936a7ea/71a9e1474_InHand-logo.webp" },
   { name: "Hikvision", logoUrl: "https://media.base44.com/images/public/6ab04a2fe7f70e5fc936a7ea/cb7479365_Hikvision.webp" },
   { name: "Lenovo", logoUrl: "https://media.base44.com/images/public/6ab04a2fe7f70e5fc936a7ea/0f21c2adb_Branding_lenovo-logo_lenovologoposred_low_res.png" },
   { name: "HP", logoUrl: "https://media.base44.com/images/public/6ab04a2fe7f70e5fc936a7ea/6b9da5b56_HP_logo_2025svg.webp" },
