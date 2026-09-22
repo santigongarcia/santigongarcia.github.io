@@ -7,6 +7,7 @@ import CertificationsGrid from "@/components/cv/CertificationsGrid";
 import SkillsPanel from "@/components/cv/SkillsPanel";
 import EducationPanel from "@/components/cv/EducationPanel";
 import DownloadCV from "@/components/cv/DownloadCV";
+import { ui } from "@/data/i18n";
 
 // Contador de "dirección de memoria" en el lateral que sigue al scroll.
 function MemoryTracker() {
@@ -43,6 +44,29 @@ export default function Home() {
     profile: null, skills: {}, vendors: [], languages: [],
   });
   const [loading, setLoading] = useState(true);
+  const [lang, setLang] = useState("es");
+  const [translating, setTranslating] = useState(false);
+  const [translated, setTranslated] = useState(null);
+
+  const handleLangChange = async (newLang) => {
+    setLang(newLang);
+    if (newLang === "en" && !translated && !translating && data.experience.length) {
+      setTranslating(true);
+      try {
+        const res = await base44.functions.invoke("translateCV", { data });
+        setTranslated(res.data?.translated || null);
+      } catch (e) {
+        setLang("es");
+      } finally {
+        setTranslating(false);
+      }
+    }
+  };
+
+  const displayData = lang === "en" && translated
+    ? { ...translated, profile: { ...data.profile, ...translated.profile }, vendors: data.vendors }
+    : data;
+  const t = ui[lang];
 
   useEffect(() => {
     Promise.all([
@@ -73,30 +97,37 @@ export default function Home() {
 
   return (
     <div className="relative min-h-screen scanlines">
-      <TerminalHeader />
+      <TerminalHeader lang={lang} onLangChange={handleLangChange} translating={translating} />
       <MemoryTracker />
       <main className="relative z-10">
         <Hero
-          profile={data.profile}
+          profile={displayData.profile}
+          lang={lang}
           onDownload={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
         />
         {loading ? (
           <div className="flex items-center justify-center py-20 font-mono text-xs text-muted-foreground">
-            <span className="text-primary">[ LOAD ]</span> fetching records<span className="cursor-blink">_</span>
+            <span className="text-primary">[ LOAD ]</span> {t.fetching}<span className="cursor-blink">_</span>
           </div>
         ) : (
           <>
-            <ExperienceTimeline experience={data.experience} />
-            <CertificationsGrid certifications={data.certifications} />
-            <SkillsPanel skills={data.skills} languages={data.languages} vendors={data.vendors} />
-            <EducationPanel education={data.education} />
+            {translating && (
+              <div className="flex items-center justify-center py-6 font-mono text-xs text-primary">
+                <span>[ TRANS ]</span><span className="ml-2 text-muted-foreground">translating to en_US</span><span className="cursor-blink">_</span>
+              </div>
+            )}
+            <ExperienceTimeline experience={displayData.experience} lang={lang} />
+            <CertificationsGrid certifications={displayData.certifications} lang={lang} />
+            <SkillsPanel skills={displayData.skills} languages={displayData.languages} vendors={displayData.vendors} lang={lang} />
+            <EducationPanel education={displayData.education} lang={lang} />
             <DownloadCV
-              profile={data.profile}
-              skills={data.skills}
-              languages={data.languages}
-              experience={data.experience}
-              certifications={data.certifications}
-              education={data.education}
+              profile={displayData.profile}
+              skills={displayData.skills}
+              languages={displayData.languages}
+              experience={displayData.experience}
+              certifications={displayData.certifications}
+              education={displayData.education}
+              lang={lang}
             />
           </>
         )}

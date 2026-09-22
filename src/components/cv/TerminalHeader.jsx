@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Wifi, Lock } from "lucide-react";
 
 // Barra superior estilo ventana de terminal + indicador de latencia simulada.
-export default function TerminalHeader() {
+export default function TerminalHeader({ lang, onLangChange, translating }) {
   const [latency, setLatency] = useState(14);
   const [clock, setClock] = useState("");
 
@@ -39,6 +39,22 @@ export default function TerminalHeader() {
             <Wifi className="h-3.5 w-3.5 text-primary" />
             <span className="text-primary">{latency}ms</span>
           </span>
+          <div className="flex items-center gap-0.5 border border-border px-1.5 py-0.5">
+            <button
+              onClick={() => onLangChange("es")}
+              className={`font-mono text-[11px] transition ${lang === "es" ? "text-primary text-glow" : "text-muted-foreground hover:text-foreground"}`}
+            >
+              ES
+            </button>
+            <span className="text-border">/</span>
+            <button
+              onClick={() => onLangChange("en")}
+              disabled={translating}
+              className={`font-mono text-[11px] transition ${lang === "en" ? "text-primary text-glow" : "text-muted-foreground hover:text-foreground"} ${translating ? "opacity-50" : ""}`}
+            >
+              EN{translating ? "…" : ""}
+            </button>
+          </div>
           <Link
             to="/admin"
             className="hidden items-center gap-1 border border-border px-2 py-0.5 text-primary transition hover:border-primary hover:bg-primary/10 sm:flex"

@@ -3,12 +3,14 @@ import { motion } from "framer-motion";
 import { GraduationCap } from "lucide-react";
 import { Image } from "@/components/ui/image";
 import { SectionHeader } from "./ExperienceTimeline";
+import { ui } from "@/data/i18n";
 
-export default function EducationPanel({ education = [] }) {
+export default function EducationPanel({ education = [], lang = "es" }) {
+  const t = ui[lang];
   return (
     <section id="education" className="relative px-4 py-16">
       <div className="mx-auto max-w-5xl">
-        <SectionHeader code="EDU.PATH" title="education.log" comment="// ruta de formación académica" />
+        <SectionHeader code="EDU.PATH" title="education.log" comment={t.eduComment} />
 
         <div className="mt-8 space-y-3">
           {education.map((e, idx) => (

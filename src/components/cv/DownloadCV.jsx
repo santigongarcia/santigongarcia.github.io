@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { Mail, Linkedin, FileDown } from "lucide-react";
 import { profile as defaultProfile, skills as defaultSkills, languages as defaultLanguages } from "@/data/cvData";
+import { ui } from "@/data/i18n";
 
 // Genera un PDF del CV con estética terminal (fondo oscuro, mono, verde).
-export default function DownloadCV({ experience = [], education = [], certifications = [], profile: profileProp, skills: skillsProp, languages: languagesProp }) {
+export default function DownloadCV({ experience = [], education = [], certifications = [], profile: profileProp, skills: skillsProp, languages: languagesProp, lang = "es" }) {
   const [progress, setProgress] = useState(0);
   const [exporting, setExporting] = useState(false);
 
@@ -18,6 +19,7 @@ export default function DownloadCV({ experience = [], education = [], certificat
   };
   const skills = skillsProp && Object.keys(skillsProp).length ? skillsProp : defaultSkills;
   const languages = languagesProp && languagesProp.length ? languagesProp : defaultLanguages;
+  const t = ui[lang];
 
   const handleDownload = async () => {
     if (exporting) return;
@@ -47,11 +49,11 @@ export default function DownloadCV({ experience = [], education = [], certificat
     doc.setTextColor(0, 255, 0);
     doc.setFont(mono, "bold");
     doc.setFontSize(20);
-    doc.text("Santiago Gonzalez Garcia", M, y + 8);
+    doc.text(profile.name || "Santiago Gonzalez Garcia", M, y + 8);
     y += 24;
     doc.setFontSize(9);
     doc.setTextColor(226, 232, 240);
-    doc.text("[ROOT_USER] Tecnico de Sistemas y Redes", M, y);
+    doc.text(`[ROOT_USER] ${profile.role || "Tecnico de Sistemas y Redes"}`, M, y);
     y += 14;
     doc.setTextColor(113, 113, 122);
     doc.text(`${profile.location}`, M, y);
@@ -207,12 +209,12 @@ export default function DownloadCV({ experience = [], education = [], certificat
   return (
     <section id="contact" className="relative px-4 py-16">
       <div className="mx-auto max-w-3xl border border-border bg-card/40 p-6 text-center sm:p-10">
-        <div className="font-mono text-xs text-primary">[ EXIT ] — session end</div>
+        <div className="font-mono text-xs text-primary">{t.sessionEnd}</div>
         <h2 className="mt-3 font-mono text-2xl font-bold uppercase tracking-widest text-foreground">
-          <span className="text-primary">$</span> contact
+          <span className="text-primary">$</span> {t.contactTitle}
         </h2>
         <p className="mt-2 font-mono text-sm text-muted-foreground">
-          // disponible para nuevos retos en sistemas, redes e infraestructura
+          {t.contactTagline}
         </p>
 
         <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
@@ -241,13 +243,13 @@ export default function DownloadCV({ experience = [], education = [], certificat
             className="inline-flex items-center gap-2 border border-primary bg-primary/10 px-6 py-3 font-mono text-sm font-medium text-primary transition hover:bg-primary hover:text-primary-foreground disabled:opacity-60"
           >
             <FileDown className="h-4 w-4" />
-            {exporting ? "exporting..." : "santiago --download-cv"}
+            {exporting ? t.exporting : t.downloadBtn}
             <span className="cursor-blink">_</span>
           </button>
 
           {exporting && (
             <div className="mt-4 font-mono text-xs text-muted-foreground">
-              <span className="text-primary">[STDOUT]</span> exporting pdf
+              <span className="text-primary">{t.stdout}</span> {t.exportingPdf}
               <div className="mx-auto mt-2 max-w-xs">
                 <div className="flex h-3 w-full border border-border bg-secondary">
                   <div
@@ -256,7 +258,7 @@ export default function DownloadCV({ experience = [], education = [], certificat
                   />
                 </div>
                 <div className="mt-1 text-primary">
-                  [{"█".repeat(bars)}{"·".repeat(10 - bars)}] {Math.round(progress)}% {progress >= 100 ? "Export Complete" : ""}
+                  [{"█".repeat(bars)}{"·".repeat(10 - bars)}] {Math.round(progress)}% {progress >= 100 ? t.exportComplete : ""}
                 </div>
               </div>
             </div>
@@ -266,10 +268,10 @@ export default function DownloadCV({ experience = [], education = [], certificat
 
       <footer className="mx-auto mt-10 max-w-3xl border-t border-border pt-6 text-center font-mono text-[11px] text-muted-foreground">
         <p>
-          <span className="text-primary">santiago@gonzalez</span>:<span className="text-primary">~</span>$ exit
+          <span className="text-primary">santiago@gonzalez</span>:<span className="text-primary">~</span>$ {t.exit}
           <span className="cursor-blink">_</span>
         </p>
-        <p className="mt-2">© {new Date().getFullYear()} {profile.name} — built with terminal-grade precision.</p>
+        <p className="mt-2">© {new Date().getFullYear()} {profile.name} — {t.footerBuilt}</p>
       </footer>
     </section>
   );

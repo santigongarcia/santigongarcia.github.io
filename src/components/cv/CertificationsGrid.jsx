@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ShieldCheck, Lock, ChevronRight } from "lucide-react";
 import { Image } from "@/components/ui/image";
 import { SectionHeader } from "./ExperienceTimeline";
+import { ui } from "@/data/i18n";
 
 // Certificaciones presentadas como "secure tokens" con checksum verificado.
 // Al hacer clic se "descifran" los detalles.
@@ -12,13 +13,14 @@ function checksum(name) {
   return h.toString(16).padStart(8, "0").toUpperCase();
 }
 
-export default function CertificationsGrid({ certifications = [] }) {
+export default function CertificationsGrid({ certifications = [], lang = "es" }) {
   const [open, setOpen] = useState(0);
+  const t = ui[lang];
 
   return (
     <section id="certs" className="relative px-4 py-16">
       <div className="mx-auto max-w-5xl">
-        <SectionHeader code="CERT.VALID" title="certs.db" comment="// capa de validación — tokens verificados" />
+        <SectionHeader code="CERT.VALID" title="certs.db" comment={t.certComment} />
 
         <div className="mt-8 grid gap-3 sm:grid-cols-2">
           {certifications.map((c, idx) => {
@@ -71,12 +73,12 @@ export default function CertificationsGrid({ certifications = [] }) {
                     >
                       <div className="mt-3 border-t border-border pt-3 font-mono text-xs text-muted-foreground">
                         <div className="text-primary">[ DECRYPT ]</div>
-                        <div className="mt-1">issuer: <span className="text-foreground">{c.issuer}</span></div>
+                        <div className="mt-1">{t.certIssuer}: <span className="text-foreground">{c.issuer}</span></div>
                         <div className="mt-1 flex items-center gap-1.5">
-                          <span>checksum:</span>
+                          <span>{t.certChecksum}:</span>
                           <span className="text-primary">{checksum(c.name)}</span>
                           <ShieldCheck className="h-3 w-3 text-primary" />
-                          <span className="text-primary">VERIFIED</span>
+                          <span className="text-primary">{t.certVerified}</span>
                         </div>
                       </div>
                     </motion.div>

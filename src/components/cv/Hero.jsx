@@ -2,12 +2,14 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { Terminal, Download, ChevronDown } from "lucide-react";
 import { profile as defaultProfile } from "@/data/cvData";
+import { ui } from "@/data/i18n";
 import BootSequence from "./BootSequence";
 import { Image } from "@/components/ui/image";
 
-export default function Hero({ onDownload, profile }) {
+export default function Hero({ onDownload, profile, lang = "es" }) {
   const [booted, setBooted] = useState(false);
   const p = profile || defaultProfile;
+  const t = ui[lang];
 
   return (
     <section className="relative terminal-grid overflow-hidden px-4 py-12 sm:py-20">
@@ -121,7 +123,7 @@ export default function Hero({ onDownload, profile }) {
 
             <div className="flex items-center gap-2 pt-8 font-mono text-xs text-muted-foreground">
               <ChevronDown className="h-4 w-4 animate-bounce text-primary" />
-              <span>scroll to traverse memory addresses</span>
+              <span>{t.scrollHint}</span>
             </div>
           </motion.div>
         )}

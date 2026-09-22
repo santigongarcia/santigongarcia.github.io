@@ -2,6 +2,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import { MapPin, Calendar } from "lucide-react";
 import { Image } from "@/components/ui/image";
+import { ui } from "@/data/i18n";
 
 // Línea de tiempo vertical estilo cable de red. Los logos son cajas de marca
 // en zinc monocromo que pasan a cyan al hacer hover (efecto "port scan").
@@ -29,11 +30,12 @@ function LogoBlock({ logoUrl, logoText, idx }) {
   );
 }
 
-export default function ExperienceTimeline({ experience = [] }) {
+export default function ExperienceTimeline({ experience = [], lang = "es" }) {
+  const t = ui[lang];
   return (
     <section id="experience" className="relative px-4 py-16">
       <div className="mx-auto max-w-5xl">
-        <SectionHeader code="EXP.LOAD" title="experience.log" comment="// topología de experiencia profesional" />
+        <SectionHeader code="EXP.LOAD" title="experience.log" comment={t.expComment} />
 
         <div className="relative mt-10 pl-2 sm:pl-10">
           {/* cable de red vertical */}
