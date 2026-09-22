@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { Terminal, Download, ChevronDown } from "lucide-react";
-import { profile } from "@/data/cvData";
+import { profile as defaultProfile } from "@/data/cvData";
 import BootSequence from "./BootSequence";
 import { Image } from "@/components/ui/image";
 
-export default function Hero({ onDownload }) {
+export default function Hero({ onDownload, profile }) {
   const [booted, setBooted] = useState(false);
+  const p = profile || defaultProfile;
 
   return (
     <section className="relative terminal-grid overflow-hidden px-4 py-12 sm:py-20">
@@ -40,8 +41,8 @@ export default function Hero({ onDownload }) {
             >
               <div className="relative h-28 w-28 overflow-hidden rounded-full border-2 border-primary/50 border-glow sm:h-32 sm:w-32">
                 <Image
-                  src={profile.avatar}
-                  alt={profile.name}
+                  src={p.avatar}
+                  alt={p.name}
                   fittingType="fill"
                   className="h-full w-full"
                 />
@@ -58,7 +59,7 @@ export default function Hero({ onDownload }) {
                 transition={{ delay: 0.1 }}
                 className="font-mono text-3xl font-extrabold uppercase tracking-tight text-foreground sm:text-5xl md:text-6xl"
               >
-                {profile.name.split(" ")[0]}
+                {p.name.split(" ")[0]}
                 <span className="text-primary text-glow">_</span>
                 <span className="cursor-blink text-primary">|</span>
               </motion.h1>
@@ -68,7 +69,7 @@ export default function Hero({ onDownload }) {
                 transition={{ delay: 0.25 }}
                 className="mt-2 font-mono text-sm text-muted-foreground sm:text-base"
               >
-                <span className="text-primary">[ROOT_USER]</span> {profile.name}
+                <span className="text-primary">[ROOT_USER]</span> {p.name}
               </motion.p>
             </div>
 
@@ -79,9 +80,9 @@ export default function Hero({ onDownload }) {
               className="flex flex-wrap items-center gap-x-4 gap-y-1 font-mono text-sm"
             >
               <span className="text-muted-foreground">$</span>
-              <span className="text-foreground">{profile.role}</span>
+              <span className="text-foreground">{p.role}</span>
               <span className="text-border">·</span>
-              <span className="text-primary">{profile.currentRole}</span>
+              <span className="text-primary">{p.currentRole}</span>
             </motion.div>
 
             <motion.div
@@ -91,7 +92,7 @@ export default function Hero({ onDownload }) {
               className="max-w-2xl border-l-2 border-primary/40 pl-4 font-mono text-sm leading-relaxed text-muted-foreground"
             >
               <span className="text-primary"># cat /etc/profile.summary</span>
-              <p className="mt-2 text-foreground/90">{profile.summary}</p>
+              <p className="mt-2 text-foreground/90">{p.summary}</p>
             </motion.div>
 
             <motion.div
@@ -109,7 +110,7 @@ export default function Hero({ onDownload }) {
                 <span className="cursor-blink">_</span>
               </button>
               <a
-                href={profile.contact.linkedin}
+                href={p.linkedin || p.contact?.linkedin}
                 target="_blank"
                 rel="noreferrer"
                 className="inline-flex items-center gap-2 border border-border px-4 py-2.5 font-mono text-sm text-muted-foreground transition hover:border-primary hover:text-primary"

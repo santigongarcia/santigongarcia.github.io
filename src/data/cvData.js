@@ -177,6 +177,5 @@ export const education = [
 
 export const languages = [
   { name: "Español", level: "Nativo / Bilingüe", pct: 100 },
-  { name: "Inglés", level: "Professional Working", pct: 70 },
-  { name: "Japonés", level: "Elementary", pct: 25 },
+  { name: "Inglés", level: "Professional Working", pct: 60 },
 ];

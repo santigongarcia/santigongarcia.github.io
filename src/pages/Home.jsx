@@ -38,7 +38,10 @@ function MemoryTracker() {
 }
 
 export default function Home() {
-  const [data, setData] = useState({ experience: [], certifications: [], education: [] });
+  const [data, setData] = useState({
+    experience: [], certifications: [], education: [],
+    profile: null, skills: {}, vendors: [], languages: [],
+  });
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -46,12 +49,24 @@ export default function Home() {
       base44.entities.Experience.list("order", 200),
       base44.entities.Certification.list("order", 200),
       base44.entities.Education.list("order", 200),
+      base44.entities.Profile.list("order", 5),
+      base44.entities.Skill.list("order", 50),
+      base44.entities.Vendor.list("order", 100),
+      base44.entities.Language.list("order", 50),
     ])
-      .then(([experience, certifications, education]) => {
-        setData({ experience, certifications, education });
+      .then(([experience, certifications, education, profiles, skillsRecs, vendors, languages]) => {
+        const skillsObj = {};
+        skillsRecs.forEach((s) => { skillsObj[s.category] = s.items || []; });
+        setData({
+          experience, certifications, education,
+          profile: profiles[0] || null,
+          skills: skillsObj,
+          vendors,
+          languages,
+        });
       })
       .catch(() => {
-        // en caso de error, dejamos arrays vacíos (el CV sigue renderizando)
+        // en caso de error, dejamos valores por defecto (el CV sigue renderizando)
       })
       .finally(() => setLoading(false));
   }, []);
@@ -61,7 +76,10 @@ export default function Home() {
       <TerminalHeader />
       <MemoryTracker />
       <main className="relative z-10">
-        <Hero onDownload={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })} />
+        <Hero
+          profile={data.profile}
+          onDownload={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
+        />
         {loading ? (
           <div className="flex items-center justify-center py-20 font-mono text-xs text-muted-foreground">
             <span className="text-primary">[ LOAD ]</span> fetching records<span className="cursor-blink">_</span>
@@ -70,9 +88,12 @@ export default function Home() {
           <>
             <ExperienceTimeline experience={data.experience} />
             <CertificationsGrid certifications={data.certifications} />
-            <SkillsPanel />
+            <SkillsPanel skills={data.skills} languages={data.languages} vendors={data.vendors} />
             <EducationPanel education={data.education} />
             <DownloadCV
+              profile={data.profile}
+              skills={data.skills}
+              languages={data.languages}
               experience={data.experience}
               certifications={data.certifications}
               education={data.education}

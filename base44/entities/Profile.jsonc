@@ -1,0 +1,68 @@
+{
+  "name": "Profile",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "title": "Nombre"
+    },
+    "role": {
+      "type": "string",
+      "title": "Puesto"
+    },
+    "currentRole": {
+      "type": "string",
+      "title": "Puesto actual"
+    },
+    "location": {
+      "type": "string",
+      "title": "Ubicaci\u00f3n"
+    },
+    "summary": {
+      "type": "string",
+      "title": "Resumen"
+    },
+    "email": {
+      "type": "string",
+      "title": "Email"
+    },
+    "linkedin": {
+      "type": "string",
+      "title": "LinkedIn URL"
+    },
+    "linkedinHandle": {
+      "type": "string",
+      "title": "Handle LinkedIn"
+    },
+    "avatar": {
+      "type": "string",
+      "title": "URL del avatar"
+    },
+    "order": {
+      "type": "number",
+      "title": "Orden",
+      "default": 0
+    }
+  },
+  "required": [
+    "name"
+  ],
+  "rls": {
+    "read": {},
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

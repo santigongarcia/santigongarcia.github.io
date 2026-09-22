@@ -1,7 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { Cpu, Wrench, Monitor, Languages as LangIcon } from "lucide-react";
-import { skills, languages } from "@/data/cvData";
+import { skills as defaultSkills, languages as defaultLanguages } from "@/data/cvData";
 import { SectionHeader } from "./ExperienceTimeline";
 import VendorLogos from "./VendorLogos";
 
@@ -11,14 +11,16 @@ const ICONS = {
   "Sistemas operativos": Monitor,
 };
 
-export default function SkillsPanel() {
+export default function SkillsPanel({ skills, languages, vendors }) {
+  const sk = skills && Object.keys(skills).length ? skills : defaultSkills;
+  const langs = languages && languages.length ? languages : defaultLanguages;
   return (
     <section id="skills" className="relative px-4 py-16">
       <div className="mx-auto max-w-5xl">
         <SectionHeader code="SYS.ENV" title="skills.cfg" comment="// entorno de capacidades del sistema" />
 
         <div className="mt-8 grid gap-4 md:grid-cols-3">
-          {Object.entries(skills).map(([cat, items], idx) => {
+          {Object.entries(sk).map(([cat, items], idx) => {
             const Icon = ICONS[cat] || Cpu;
             return (
               <motion.div
@@ -46,7 +48,7 @@ export default function SkillsPanel() {
           })}
         </div>
 
-        <VendorLogos />
+        <VendorLogos vendors={vendors} />
 
         {/* Idiomas como barras de progreso estilo diagnóstico */}
         <div className="mt-8 border border-border bg-card/40 p-5">
@@ -55,7 +57,7 @@ export default function SkillsPanel() {
             <span className="font-mono text-xs font-bold uppercase tracking-wider text-foreground">languages — locale dump</span>
           </div>
           <div className="mt-4 space-y-4">
-            {languages.map((l, idx) => (
+            {langs.map((l, idx) => (
               <div key={l.name}>
                 <div className="flex items-baseline justify-between font-mono text-xs">
                   <span className="text-foreground">{l.name}</span>

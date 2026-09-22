@@ -5,6 +5,18 @@ import { Terminal, LogOut, ArrowLeft, ShieldAlert, RotateCw } from "lucide-react
 import AdminManager from "@/components/admin/AdminManager";
 
 const TABS = [
+  { key: "profile", label: "profile.cfg", entity: "Profile", code: "USER.INFO", fields: [
+    { key: "name", label: "Nombre", full: true },
+    { key: "role", label: "Puesto" },
+    { key: "currentRole", label: "Puesto actual", full: true },
+    { key: "location", label: "Ubicación", full: true },
+    { key: "summary", label: "Resumen", type: "textarea", full: true },
+    { key: "email", label: "Email" },
+    { key: "linkedin", label: "LinkedIn URL", full: true },
+    { key: "linkedinHandle", label: "Handle LinkedIn" },
+    { key: "avatar", label: "URL del avatar", full: true },
+    { key: "order", label: "Orden", type: "number" },
+  ]},
   { key: "experience", label: "experience.log", entity: "Experience", code: "EXP.LOAD", fields: [
     { key: "company", label: "Empresa" },
     { key: "role", label: "Puesto" },
@@ -30,10 +42,26 @@ const TABS = [
     { key: "logoUrl", label: "URL del logo", full: true },
     { key: "order", label: "Orden", type: "number" },
   ]},
+  { key: "skill", label: "skills.cfg", entity: "Skill", code: "SYS.ENV", fields: [
+    { key: "category", label: "Categoría" },
+    { key: "items", label: "Habilidades (una línea por item)", type: "textarea", array: true, full: true },
+    { key: "order", label: "Orden", type: "number" },
+  ]},
+  { key: "vendor", label: "vendors.cfg", entity: "Vendor", code: "HW.VENDORS", fields: [
+    { key: "name", label: "Fabricante" },
+    { key: "logoUrl", label: "URL del logo", full: true },
+    { key: "order", label: "Orden", type: "number" },
+  ]},
+  { key: "language", label: "languages.locale", entity: "Language", code: "LANG.DUMP", fields: [
+    { key: "name", label: "Idioma" },
+    { key: "level", label: "Nivel" },
+    { key: "pct", label: "Porcentaje", type: "number" },
+    { key: "order", label: "Orden", type: "number" },
+  ]},
 ];
 
 export default function Admin() {
-  const [tab, setTab] = useState("experience");
+  const [tab, setTab] = useState("profile");
   const [user, setUser] = useState(null);
   const [checking, setChecking] = useState(true);
 

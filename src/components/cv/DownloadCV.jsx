@@ -1,11 +1,23 @@
 import React, { useState } from "react";
 import { Mail, Linkedin, FileDown } from "lucide-react";
-import { profile, skills, languages } from "@/data/cvData";
+import { profile as defaultProfile, skills as defaultSkills, languages as defaultLanguages } from "@/data/cvData";
 
 // Genera un PDF del CV con estética terminal (fondo oscuro, mono, verde).
-export default function DownloadCV({ experience = [], education = [], certifications = [] }) {
+export default function DownloadCV({ experience = [], education = [], certifications = [], profile: profileProp, skills: skillsProp, languages: languagesProp }) {
   const [progress, setProgress] = useState(0);
   const [exporting, setExporting] = useState(false);
+
+  const rawProfile = profileProp || defaultProfile;
+  const profile = {
+    ...rawProfile,
+    contact: rawProfile.contact || {
+      email: rawProfile.email,
+      linkedin: rawProfile.linkedin,
+      linkedinHandle: rawProfile.linkedinHandle,
+    },
+  };
+  const skills = skillsProp && Object.keys(skillsProp).length ? skillsProp : defaultSkills;
+  const languages = languagesProp && languagesProp.length ? languagesProp : defaultLanguages;
 
   const handleDownload = async () => {
     if (exporting) return;

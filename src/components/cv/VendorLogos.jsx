@@ -2,12 +2,13 @@ import React from "react";
 import { motion } from "framer-motion";
 import { Server } from "lucide-react";
 import { Image } from "@/components/ui/image";
-import { vendors } from "@/data/cvData";
+import { vendors as defaultVendors } from "@/data/cvData";
 import { SectionHeader } from "./ExperienceTimeline";
 
 // Sección de fabricantes de equipos de red y telecomunicaciones soportados.
 // Renderiza tiles estilo terminal con el nombre del fabricante (logo textual).
-export default function VendorLogos() {
+export default function VendorLogos({ vendors }) {
+  const list = vendors && vendors.length ? vendors : defaultVendors;
   return (
     <div className="mt-8 border border-border bg-card/40 p-5">
       <div className="flex items-center gap-2 border-b border-border pb-3">
@@ -20,7 +21,7 @@ export default function VendorLogos() {
         // fabricantes de equipos de red y telecomunicaciones soportados
       </p>
       <div className="mt-4 grid grid-cols-2 gap-2 sm:grid-cols-3 md:grid-cols-5">
-        {vendors.map((v, idx) => (
+        {list.map((v, idx) => (
           <motion.div
             key={v}
             initial={{ opacity: 0, scale: 0.92 }}
