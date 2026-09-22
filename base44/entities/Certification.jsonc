@@ -18,6 +18,10 @@
       "type": "string",
       "title": "URL del logo"
     },
+    "certificateImageUrl": {
+      "type": "string",
+      "title": "URL de la imagen del certificado"
+    },
     "order": {
       "type": "number",
       "title": "Orden",

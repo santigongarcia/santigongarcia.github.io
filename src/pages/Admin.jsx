@@ -33,6 +33,7 @@ const TABS = [
     { key: "issuer", label: "Entidad emisora" },
     { key: "tag", label: "Etiqueta" },
     { key: "logoUrl", label: "URL del logo", full: true },
+    { key: "certificateImageUrl", label: "URL de la imagen del certificado", full: true },
     { key: "order", label: "Orden", type: "number" },
   ]},
   { key: "education", label: "education.log", entity: "Education", code: "EDU.PATH", fields: [

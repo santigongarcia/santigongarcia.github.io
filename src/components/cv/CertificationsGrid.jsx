@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ShieldCheck, Lock, ChevronRight } from "lucide-react";
+import { ShieldCheck, Lock, ChevronRight, Eye } from "lucide-react";
 import { Image } from "@/components/ui/image";
 import { SectionHeader } from "./ExperienceTimeline";
 import { ui } from "@/data/i18n";
+import CertificateViewer from "./CertificateViewer";
 
 // Certificaciones presentadas como "secure tokens" con checksum verificado.
 // Al hacer clic se "descifran" los detalles.
@@ -15,6 +16,7 @@ function checksum(name) {
 
 export default function CertificationsGrid({ certifications = [], lang = "es" }) {
   const [open, setOpen] = useState(0);
+  const [viewing, setViewing] = useState(null);
   const t = ui[lang];
 
   return (
@@ -57,9 +59,22 @@ export default function CertificationsGrid({ certifications = [], lang = "es" })
                       <div className="font-mono text-sm font-bold text-foreground">{c.name}</div>
                     </div>
                   </div>
-                  <ChevronRight
-                    className={`h-4 w-4 shrink-0 text-muted-foreground transition-transform ${active ? "rotate-90 text-primary" : ""}`}
-                  />
+                  <div className="flex items-center gap-1.5">
+                    {c.certificateImageUrl && (
+                      <span
+                        role="button"
+                        tabIndex={0}
+                        onClick={(e) => { e.stopPropagation(); setViewing(c); }}
+                        onKeyDown={(e) => { if (e.key === "Enter") { e.stopPropagation(); setViewing(c); } }}
+                        className="inline-flex items-center gap-1 border border-border px-2 py-0.5 font-mono text-[10px] text-muted-foreground transition hover:border-primary hover:text-primary"
+                      >
+                        <Eye className="h-3 w-3" /> view
+                      </span>
+                    )}
+                    <ChevronRight
+                      className={`h-4 w-4 shrink-0 text-muted-foreground transition-transform ${active ? "rotate-90 text-primary" : ""}`}
+                    />
+                  </div>
                 </div>
 
                 <AnimatePresence>
@@ -89,6 +104,10 @@ export default function CertificationsGrid({ certifications = [], lang = "es" })
           })}
         </div>
       </div>
+
+      {viewing && (
+        <CertificateViewer cert={viewing} onClose={() => setViewing(null)} lang={lang} />
+      )}
     </section>
   );
 }
