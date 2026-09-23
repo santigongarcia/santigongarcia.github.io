@@ -28,14 +28,14 @@ export default function CertificationsGrid({ certifications = [], lang = "es" })
           {certifications.map((c, idx) => {
             const active = open === idx;
             return (
-              <motion.button
+              <motion.div
                 key={c.id || idx}
                 onClick={() => setOpen(active ? -1 : idx)}
                 initial={{ opacity: 0, y: 10 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.3, delay: idx * 0.05 }}
-                className={`group relative overflow-hidden border bg-card/40 p-4 text-left transition-all ${
+                className={`group relative cursor-pointer overflow-hidden border bg-card/40 p-4 text-left transition-all ${
                   active ? "border-primary border-glow" : "border-border hover:border-primary/50"
                 }`}
               >
@@ -61,15 +61,13 @@ export default function CertificationsGrid({ certifications = [], lang = "es" })
                   </div>
                   <div className="flex items-center gap-1.5">
                     {c.certificateImageUrl && (
-                      <span
-                        role="button"
-                        tabIndex={0}
+                      <button
+                        type="button"
                         onClick={(e) => { e.stopPropagation(); setViewing(c); }}
-                        onKeyDown={(e) => { if (e.key === "Enter") { e.stopPropagation(); setViewing(c); } }}
                         className="inline-flex items-center gap-1 border border-border px-2 py-0.5 font-mono text-[10px] text-muted-foreground transition hover:border-primary hover:text-primary"
                       >
                         <Eye className="h-3 w-3" /> view
-                      </span>
+                      </button>
                     )}
                     <ChevronRight
                       className={`h-4 w-4 shrink-0 text-muted-foreground transition-transform ${active ? "rotate-90 text-primary" : ""}`}
@@ -99,7 +97,7 @@ export default function CertificationsGrid({ certifications = [], lang = "es" })
                     </motion.div>
                   )}
                 </AnimatePresence>
-              </motion.button>
+              </motion.div>
             );
           })}
         </div>

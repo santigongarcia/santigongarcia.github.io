@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { motion } from "framer-motion";
-import { X, ShieldCheck, ExternalLink, Download } from "lucide-react";
-import { Image } from "@/components/ui/image";
+import { X, ShieldCheck, Download } from "lucide-react";
 import { ui } from "@/data/i18n";
 
 // Visor modal estilo terminal que muestra la imagen del certificado a tamaño completo.
@@ -70,11 +69,10 @@ export default function CertificateViewer({ cert, onClose, lang = "es" }) {
         {/* Imagen del certificado */}
         <div className="flex items-center justify-center bg-[#0c0c0e] p-4 sm:p-8">
           {cert.certificateImageUrl ? (
-            <Image
+            <img
               src={cert.certificateImageUrl}
               alt={cert.name}
-              fittingType="fit"
-              className="max-h-[75vh] w-auto max-w-full border border-border/50 shadow-2xl"
+              className="max-h-[75vh] w-auto max-w-full border border-border/50 shadow-2xl object-contain"
             />
           ) : (
             <div className="flex h-64 flex-col items-center justify-center border border-dashed border-border p-12 text-center">
