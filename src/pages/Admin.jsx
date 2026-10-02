@@ -53,6 +53,11 @@ const TABS = [
     { key: "logoUrl", label: "Logo (imagen)", type: "image", full: true },
     { key: "order", label: "Orden", type: "number" },
   ]},
+  { key: "technology", label: "technologies.cfg", entity: "Technology", code: "TECH.STACK", fields: [
+    { key: "name", label: "Tecnología" },
+    { key: "logoUrl", label: "Logo (imagen)", type: "image", full: true },
+    { key: "order", label: "Orden", type: "number" },
+  ]},
   { key: "language", label: "languages.locale", entity: "Language", code: "LANG.DUMP", fields: [
     { key: "name", label: "Idioma" },
     { key: "level", label: "Nivel" },

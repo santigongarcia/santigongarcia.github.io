@@ -5,6 +5,7 @@ import { skills as defaultSkills, languages as defaultLanguages } from "@/data/c
 import { ui } from "@/data/i18n";
 import { SectionHeader } from "./ExperienceTimeline";
 import VendorLogos from "./VendorLogos";
+import TechnologiesPanel from "./TechnologiesPanel";
 
 const ICONS = {
   Software: Cpu,
@@ -12,7 +13,7 @@ const ICONS = {
   "Sistemas operativos": Monitor,
 };
 
-export default function SkillsPanel({ skills, languages, vendors, lang = "es" }) {
+export default function SkillsPanel({ skills, languages, vendors, technologies, lang = "es" }) {
   const sk = skills && Object.keys(skills).length ? skills : defaultSkills;
   const langs = languages && languages.length ? languages : defaultLanguages;
   const t = ui[lang];
@@ -51,6 +52,8 @@ export default function SkillsPanel({ skills, languages, vendors, lang = "es" })
         </div>
 
         <VendorLogos vendors={vendors} />
+
+        <TechnologiesPanel technologies={technologies} />
 
         {/* Idiomas como barras de progreso estilo diagnóstico */}
         <div className="mt-8 border border-border bg-card/40 p-5">
