@@ -4,6 +4,7 @@ import TerminalHeader from "@/components/cv/TerminalHeader";
 import Hero from "@/components/cv/Hero";
 import ExperienceTimeline from "@/components/cv/ExperienceTimeline";
 import CertificationsGrid from "@/components/cv/CertificationsGrid";
+import BadgesShowcase from "@/components/cv/BadgesShowcase";
 import SkillsPanel from "@/components/cv/SkillsPanel";
 import EducationPanel from "@/components/cv/EducationPanel";
 import DownloadCV from "@/components/cv/DownloadCV";
@@ -40,7 +41,7 @@ function MemoryTracker() {
 
 export default function Home() {
   const [data, setData] = useState({
-    experience: [], certifications: [], education: [],
+    experience: [], certifications: [], badges: [], education: [],
     profile: null, skills: {}, vendors: [], technologies: [], languages: [],
   });
   const [loading, setLoading] = useState(true);
@@ -64,7 +65,7 @@ export default function Home() {
   };
 
   const displayData = lang === "en" && translated
-    ? { ...translated, profile: { ...data.profile, ...translated.profile }, vendors: data.vendors, technologies: data.technologies }
+    ? { ...translated, profile: { ...data.profile, ...translated.profile }, vendors: data.vendors, technologies: data.technologies, badges: data.badges }
     : data;
   const t = ui[lang];
 
@@ -72,6 +73,7 @@ export default function Home() {
     Promise.all([
       base44.entities.Experience.list("order", 200),
       base44.entities.Certification.list("order", 200),
+      base44.entities.Badge.list("order", 200),
       base44.entities.Education.list("order", 200),
       base44.entities.Profile.list("order", 5),
       base44.entities.Skill.list("order", 50),
@@ -79,11 +81,11 @@ export default function Home() {
       base44.entities.Technology.list("order", 100),
       base44.entities.Language.list("order", 50),
     ])
-      .then(([experience, certifications, education, profiles, skillsRecs, vendors, technologies, languages]) => {
+      .then(([experience, certifications, badges, education, profiles, skillsRecs, vendors, technologies, languages]) => {
         const skillsObj = {};
         skillsRecs.forEach((s) => { skillsObj[s.category] = s.items || []; });
         setData({
-          experience, certifications, education,
+          experience, certifications, badges, education,
           profile: profiles[0] || null,
           skills: skillsObj,
           vendors,
@@ -120,6 +122,7 @@ export default function Home() {
             )}
             <ExperienceTimeline experience={displayData.experience} lang={lang} />
             <CertificationsGrid certifications={displayData.certifications} lang={lang} />
+            <BadgesShowcase badges={displayData.badges} lang={lang} />
             <SkillsPanel skills={displayData.skills} languages={displayData.languages} vendors={displayData.vendors} technologies={displayData.technologies} lang={lang} />
             <EducationPanel education={displayData.education} lang={lang} />
             <DownloadCV
