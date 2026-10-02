@@ -40,6 +40,8 @@ const TABS = [
     { key: "name", label: "Nombre", full: true },
     { key: "issuer", label: "Entidad emisora" },
     { key: "imageUrl", label: "Imagen del badge", type: "image", full: true },
+    { key: "certificateImageUrl", label: "Certificado oficial (imagen)", type: "image", full: true },
+    { key: "tag", label: "Etiqueta" },
     { key: "order", label: "Orden", type: "number" },
   ]},
   { key: "education", label: "education.log", entity: "Education", code: "EDU.PATH", fields: [

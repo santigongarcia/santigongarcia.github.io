@@ -61,7 +61,7 @@ export default function Hero({ onDownload, profile, badges = [], lang = "es" }) 
                   <div className="mb-2 font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
                     <span className="text-primary">//</span> {t.badgesLabel}
                   </div>
-                  <BadgePlaques badges={badges} />
+                  <BadgePlaques badges={badges} lang={lang} />
                 </div>
               )}
             </motion.div>
