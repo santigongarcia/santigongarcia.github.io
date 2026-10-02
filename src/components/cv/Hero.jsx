@@ -4,9 +4,10 @@ import { Terminal, Download, ChevronDown } from "lucide-react";
 import { profile as defaultProfile } from "@/data/cvData";
 import { ui } from "@/data/i18n";
 import BootSequence from "./BootSequence";
+import BadgePlaques from "./BadgePlaques";
 import { Image } from "@/components/ui/image";
 
-export default function Hero({ onDownload, profile, lang = "es" }) {
+export default function Hero({ onDownload, profile, badges = [], lang = "es" }) {
   const [booted, setBooted] = useState(false);
   const p = profile || defaultProfile;
   const t = ui[lang];
@@ -39,19 +40,30 @@ export default function Hero({ onDownload, profile, lang = "es" }) {
               initial={{ opacity: 0, scale: 0.85 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.05, duration: 0.4 }}
-              className="relative mb-4 inline-block"
+              className="mb-4 flex flex-wrap items-center gap-5"
             >
-              <div className="relative h-28 w-28 overflow-hidden rounded-full border-2 border-primary/50 border-glow sm:h-32 sm:w-32">
-                <Image
-                  src={p.avatar}
-                  alt={p.name}
-                  fittingType="fill"
-                  className="h-full w-full"
-                />
+              <div className="relative inline-block">
+                <div className="relative h-28 w-28 overflow-hidden rounded-full border-2 border-primary/50 border-glow sm:h-32 sm:w-32">
+                  <Image
+                    src={p.avatar}
+                    alt={p.name}
+                    fittingType="fill"
+                    className="h-full w-full"
+                  />
+                </div>
+                <span className="absolute -bottom-1 -right-1 flex h-6 w-6 items-center justify-center rounded-full border border-primary bg-background text-[9px] font-bold text-primary text-glow">
+                  ●
+                </span>
               </div>
-              <span className="absolute -bottom-1 -right-1 flex h-6 w-6 items-center justify-center rounded-full border border-primary bg-background text-[9px] font-bold text-primary text-glow">
-                ●
-              </span>
+
+              {badges.length > 0 && (
+                <div className="border-l-2 border-primary/40 pl-4">
+                  <div className="mb-2 font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
+                    <span className="text-primary">//</span> {t.badgesLabel}
+                  </div>
+                  <BadgePlaques badges={badges} />
+                </div>
+              )}
             </motion.div>
 
             <div>

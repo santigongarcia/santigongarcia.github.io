@@ -4,7 +4,6 @@ import TerminalHeader from "@/components/cv/TerminalHeader";
 import Hero from "@/components/cv/Hero";
 import ExperienceTimeline from "@/components/cv/ExperienceTimeline";
 import CertificationsGrid from "@/components/cv/CertificationsGrid";
-import BadgesShowcase from "@/components/cv/BadgesShowcase";
 import SkillsPanel from "@/components/cv/SkillsPanel";
 import EducationPanel from "@/components/cv/EducationPanel";
 import DownloadCV from "@/components/cv/DownloadCV";
@@ -106,6 +105,7 @@ export default function Home() {
       <main className="relative z-10">
         <Hero
           profile={displayData.profile}
+          badges={displayData.badges}
           lang={lang}
           onDownload={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
         />
@@ -121,7 +121,6 @@ export default function Home() {
               </div>
             )}
             <ExperienceTimeline experience={displayData.experience} lang={lang} />
-            <BadgesShowcase badges={displayData.badges} lang={lang} />
             <CertificationsGrid certifications={displayData.certifications} lang={lang} />
             <SkillsPanel skills={displayData.skills} languages={displayData.languages} vendors={displayData.vendors} technologies={displayData.technologies} lang={lang} />
             <EducationPanel education={displayData.education} lang={lang} />
