@@ -14,7 +14,7 @@ const TABS = [
     { key: "email", label: "Email" },
     { key: "linkedin", label: "LinkedIn URL", full: true },
     { key: "linkedinHandle", label: "Handle LinkedIn" },
-    { key: "avatar", label: "URL del avatar", full: true },
+    { key: "avatar", label: "Avatar (imagen)", type: "image", full: true },
     { key: "order", label: "Orden", type: "number" },
   ]},
   { key: "experience", label: "experience.log", entity: "Experience", code: "EXP.LOAD", fields: [
@@ -24,7 +24,7 @@ const TABS = [
     { key: "duration", label: "Duración" },
     { key: "location", label: "Ubicación" },
     { key: "points", label: "Logros (una línea por item)", type: "textarea", array: true, full: true },
-    { key: "logoUrl", label: "URL del logo", full: true },
+    { key: "logoUrl", label: "Logo (imagen)", type: "image", full: true },
     { key: "logoText", label: "Texto alternativo del logo" },
     { key: "order", label: "Orden", type: "number" },
   ]},
@@ -32,15 +32,15 @@ const TABS = [
     { key: "name", label: "Nombre", full: true },
     { key: "issuer", label: "Entidad emisora" },
     { key: "tag", label: "Etiqueta" },
-    { key: "logoUrl", label: "URL del logo", full: true },
-    { key: "certificateImageUrl", label: "URL de la imagen del certificado", full: true },
+    { key: "logoUrl", label: "Logo (imagen)", type: "image", full: true },
+    { key: "certificateImageUrl", label: "Imagen del certificado", type: "image", full: true },
     { key: "order", label: "Orden", type: "number" },
   ]},
   { key: "education", label: "education.log", entity: "Education", code: "EDU.PATH", fields: [
     { key: "center", label: "Centro" },
     { key: "title", label: "Titulación", full: true },
     { key: "period", label: "Periodo" },
-    { key: "logoUrl", label: "URL del logo", full: true },
+    { key: "logoUrl", label: "Logo (imagen)", type: "image", full: true },
     { key: "order", label: "Orden", type: "number" },
   ]},
   { key: "skill", label: "skills.cfg", entity: "Skill", code: "SYS.ENV", fields: [
@@ -50,7 +50,7 @@ const TABS = [
   ]},
   { key: "vendor", label: "vendors.cfg", entity: "Vendor", code: "HW.VENDORS", fields: [
     { key: "name", label: "Fabricante" },
-    { key: "logoUrl", label: "URL del logo", full: true },
+    { key: "logoUrl", label: "Logo (imagen)", type: "image", full: true },
     { key: "order", label: "Orden", type: "number" },
   ]},
   { key: "language", label: "languages.locale", entity: "Language", code: "LANG.DUMP", fields: [

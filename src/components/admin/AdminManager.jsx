@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { base44 } from "@/api/base44Client";
 import { Plus, Pencil, Trash2, X, Save, RotateCw, AlertTriangle } from "lucide-react";
+import ImageField from "./ImageField";
 
 // Manager CRUD genérico estilo terminal. Recibe la entidad y la config de campos.
 export default function AdminManager({ entityName, fields, title, code }) {
+  const imageKey = fields.find((f) => f.type === "image")?.key;
   const [records, setRecords] = useState([]);
   const [loading, setLoading] = useState(true);
   const [editing, setEditing] = useState(null);
@@ -129,6 +131,8 @@ export default function AdminManager({ entityName, fields, title, code }) {
                     placeholder={f.array ? "Una línea por elemento" : ""}
                     className="w-full border border-border bg-background px-3 py-2 font-mono text-xs text-foreground focus:border-primary focus:outline-none"
                   />
+                ) : f.type === "image" ? (
+                  <ImageField value={editing[f.key]} onChange={(v) => setField(f.key, v)} />
                 ) : (
                   <input
                     type={f.type === "number" ? "number" : "text"}
@@ -177,8 +181,8 @@ export default function AdminManager({ entityName, fields, title, code }) {
               className="flex items-center gap-3 border border-border bg-card/40 p-3 transition hover:border-primary/40"
             >
               <div className="flex h-10 w-10 shrink-0 items-center justify-center border border-border bg-secondary/50 p-1 overflow-hidden">
-                {rec.logoUrl ? (
-                  <img src={rec.logoUrl} alt="" className="h-full w-full object-contain" />
+                {imageKey && rec[imageKey] ? (
+                  <img src={rec[imageKey]} alt="" className="h-full w-full object-contain" />
                 ) : (
                   <span className="font-mono text-[8px] font-bold text-muted-foreground">
                     {(rec.logoText || rec[fields[0].key] || "?").slice(0, 6)}
@@ -190,7 +194,7 @@ export default function AdminManager({ entityName, fields, title, code }) {
                   {rec[fields[0].key]}
                 </div>
                 <div className="truncate font-mono text-[11px] text-muted-foreground">
-                  {fields.slice(1).filter((f) => !["logoUrl", "logoText", "order"].includes(f.key)).map((f) => rec[f.key]).filter(Boolean).join(" · ")}
+                  {fields.slice(1).filter((f) => !["logoText", "order"].includes(f.key) && f.type !== "image").map((f) => rec[f.key]).filter(Boolean).join(" · ")}
                 </div>
               </div>
               <button
