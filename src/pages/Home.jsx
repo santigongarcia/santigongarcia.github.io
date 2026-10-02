@@ -121,8 +121,8 @@ export default function Home() {
               </div>
             )}
             <ExperienceTimeline experience={displayData.experience} lang={lang} />
-            <CertificationsGrid certifications={displayData.certifications} lang={lang} />
             <BadgesShowcase badges={displayData.badges} lang={lang} />
+            <CertificationsGrid certifications={displayData.certifications} lang={lang} />
             <SkillsPanel skills={displayData.skills} languages={displayData.languages} vendors={displayData.vendors} technologies={displayData.technologies} lang={lang} />
             <EducationPanel education={displayData.education} lang={lang} />
             <DownloadCV
