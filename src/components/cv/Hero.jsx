@@ -43,7 +43,7 @@ export default function Hero({ onDownload, profile, badges = [], lang = "es" }) 
               className="mb-4 flex flex-wrap items-center gap-5"
             >
               <div className="relative inline-block">
-                <div className="relative h-28 w-28 overflow-hidden rounded-full border-2 border-primary/50 border-glow sm:h-32 sm:w-32">
+                <div className="relative h-36 w-36 overflow-hidden rounded-full border-2 border-primary/50 border-glow sm:h-44 sm:w-44">
                   <Image
                     src={p.avatar}
                     alt={p.name}
