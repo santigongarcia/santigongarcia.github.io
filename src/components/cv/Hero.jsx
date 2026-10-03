@@ -4,7 +4,7 @@ import { Terminal, Download, ChevronDown } from "lucide-react";
 import { profile as defaultProfile } from "@/data/cvData";
 import { ui } from "@/data/i18n";
 import BootSequence from "./BootSequence";
-import BadgePlaques from "./BadgePlaques";
+import BadgeShowcase, { SHOWCASE_SLOTS } from "./BadgeShowcase";
 import { Image } from "@/components/ui/image";
 
 export default function Hero({ onDownload, profile, badges = [], lang = "es" }) {
@@ -57,11 +57,16 @@ export default function Hero({ onDownload, profile, badges = [], lang = "es" }) 
               </div>
 
               {badges.length > 0 && (
-                <div className="border-l-2 border-primary/40 pl-4">
-                  <div className="mb-2 font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
-                    <span className="text-primary">//</span> {t.badgesLabel}
+                <div className="min-w-[260px] flex-1 border-l-2 border-primary/40 pl-4">
+                  <div className="mb-2 flex items-center justify-between gap-2 font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
+                    <span>
+                      <span className="text-primary">//</span> {t.badgesLabel}
+                    </span>
+                    <span className="text-primary tabular-nums">
+                      {String(badges.length).padStart(2, "0")}/{SHOWCASE_SLOTS}
+                    </span>
                   </div>
-                  <BadgePlaques badges={badges} lang={lang} />
+                  <BadgeShowcase badges={badges} lang={lang} />
                 </div>
               )}
             </motion.div>
