@@ -7,6 +7,6 @@ export const base44 = createClient({
   appId,
   token,
   functionsVersion,
-  serverUrl: '',
+  serverUrl: 'https://santigongarcia.base44.app',
   appBaseUrl
 });
